@@ -84,7 +84,7 @@ SparkContext is the object that manages the connection to the clusters in Spark 
 
 \ ![An empty blank notebook](fig/cluster-overview.png)
 
-The SparkContext object is usually referenced as the variable sc. Next, to create the RDD we'll be using the *PySpark* Python interpreter, so we'll need to tell the Zeppelin notebook this by prefixing the command with `%pyspark`:
+The SparkContext object is usually referenced as the variable sc. Next, to read a CSV file called "daily_show_guests.csv" into an RDD object called "my_rdd", we'll be using the *PySpark* Python interpreter, so we'll need to tell the Zeppelin notebook this by prefixing the command with `%pyspark`:
 
 ~~~
 %pyspark
@@ -119,7 +119,7 @@ and former presidents are all under "politicians"
 `Raw_Guest_List` | The person or list of people who appeared on the show, according to Wikipedia. 
 The GoogleKnowlege_Occupation only refers to one of them in a given row. 
 
-To read a daily_show_guests.csv into an RDD object raw_data. The RDD object raw_data closely resembles a List of String objects, one object for each line in the dataset. We then use the take() method to print the first 5 elements of the RDD, so take a look at the first 5 rows of the RDD we just created:
+The RDD object my_rdd closely resembles a List of String objects, one object for each line in the dataset. We then use the take() method to print the first 5 elements of the RDD, so take a look at the first 5 rows of the RDD we just created:
 
 ~~~
 %pyspark
