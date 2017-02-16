@@ -1,5 +1,64 @@
 #Practical 2: Using Pyspark to analyse data using Apache Spark
 
+##Map/Reduce
+Let’s start with a map example where the goal is to convert temperature from Celcius to Kelvin.
+
+Here it is how it translates in PySpark.
+
+temp_c = [10, 3, -5, 25, 1, 9, 29, -10, 5]
+rdd_temp_c = sc.parallelize(temp_c)
+rdd_temp_K = rdd_temp_c.map(lambda x: x + 273.15).collect()
+print(rdd_temp_K)   
+
+You recognize the map function (please note it is not the pure python map function but PySpark map function). It acts here as the transformation function while collect is the action. It pulls all elements of the RDD to the driver.
+
+~~~
+Remark:
+~~~
+
+It is often a very bad idea to pull all the elements of the RDD to the driver because we potentially handle very large amount of data. So instead we prefer to use take as you can specify how many elements you wish to pull from the RDD.
+
+For instance to pull the first 3 elements only:
+
+~~~
+temp_c = [10, 3, -5, 25, 1, 9, 29, -10, 5]
+rdd_temp_c = sc.parallelize(temp_c)
+rdd_temp_K = rdd_temp_c.map(lambda x: x + 273.15).take(3)
+print(rdd_temp_K)   
+~~~
+
+~~~
+Challenge
+~~~
+
+~~~
+def mod(x):
+    import numpy as np
+    return (x, np.mod(x, 2))
+
+Nmax=1000
+rdd = sc.parallelize(range(Nmax)).map(mod).take(5)
+print(rdd)
+~~~
+
+Try the example above with different values for Nmax. Does it change the execution time if you take very large value for Nmax?
+
+Why?
+
+
+Now let’s take another example where we use map as the transformation and reduce for the action.
+
+# we define a list of integers
+numbers = [1, 4, 6, 2, 9, 10]
+
+rdd_numbers=sc.parallelize(numbers)
+
+# Use reduce to combine numbers
+rdd_reduce = rdd_numbers.reduce(lambda x,y: "(" + str(x) + ", " + str(y) + ")")
+print(rdd_reduce)
+
+# Next exercise 
+
 In these exercises, we'll be using some example data from the **Five Thirty Eight** project. 538 publish articles based on the analysis of polling and other data and make many of the datasets they use available for further analysis.
 
 Website: [http://fivethirtyeight.com/](http://fivethirtyeight.com/)
@@ -217,22 +276,21 @@ Will now result in the complete tally of years and numbers of guests per year:
 [(u'1999', 166), (u'2002', 159), (u'2000', 169), (u'2006', 161), (u'2004', 164), (u'2015', 100), (u'2008', 164), (u'2011', 163), (u'2013', 166), (u'2005', 162), (u'2003', 166), (u'2001', 157), (u'2007', 141), (u'2014', 163), (u'2009', 163), (u'2010', 165), (u'2012', 164)]
 ~~~
 
-##Challenges
-###Challenge 1:
+##Solution to Challenges
 
-In a similar to the worked example above, generate a tally of professions. This is in the `GoogleKnowlege_Occupation` field (the second element in each line, so `line[1]`).
+###Solution to Challenge 1
 
-You might find that some of the lines don't have a profession listed, so you will need to skip over them. Python is case sensitive so *politician* and *Politician* are different. How could you handle these?
+Transformations are executed after actions and here we select 5 values only (take(5)) so whatever the number of Nmax, Spark executes exactly the same number of operations.
 
-### Challenge 2:
+~~~
+def mod(x):
+  import numpy as np
+  return (x, np.mod(x, 2))
 
-Count how many times people in the occupation group *Comedy* have appeared on the show. How may times did people in this group appear in 2014?
-
-### Challenge 3:
-
-How many times has Will Ferrell appeared on the show?
-
-As you've seen, **538** host lots of interesting data sets. Choose one or two others and see if you can import and process the dataset to produce some insight. 
+Nmax= 10000000000
+rdd = sc.parallelize(range(Nmax)).map(mod).take(5)
+print(rdd)
+~~~
 
 ##Further reading
 
