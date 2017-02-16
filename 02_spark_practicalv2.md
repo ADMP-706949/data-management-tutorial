@@ -12,9 +12,7 @@ print(rdd_temp_K)
 
 You recognize the map function (please note it is not the pure python map function but PySpark map function). It acts here as the transformation function while collect is the action. It pulls all elements of the RDD to the driver.
 
-~~~
-Remark:
-~~~
+####Remark:
 
 It is often a very bad idea to pull all the elements of the RDD to the driver because we potentially handle very large amount of data. So instead we prefer to use take as you can specify how many elements you wish to pull from the RDD.
 
@@ -27,9 +25,7 @@ rdd_temp_K = rdd_temp_c.map(lambda x: x + 273.15).take(3)
 print(rdd_temp_K)   
 ~~~
 
-~~~
-Challenge
-~~~
+####Challenge
 
 ~~~
 def mod(x):
@@ -45,6 +41,7 @@ Try the example above with different values for Nmax. Does it change the executi
 
 Why?
 
+If you get the answer without looking for help, award yourself a pat on the back! If you need a pointer or two, have a look at the solution's section at the end of this document.
 
 Now let’s take another example where we use map as the transformation and reduce for the action.
 
@@ -276,7 +273,7 @@ Will now result in the complete tally of years and numbers of guests per year:
 [(u'1999', 166), (u'2002', 159), (u'2000', 169), (u'2006', 161), (u'2004', 164), (u'2015', 100), (u'2008', 164), (u'2011', 163), (u'2013', 166), (u'2005', 162), (u'2003', 166), (u'2001', 157), (u'2007', 141), (u'2014', 163), (u'2009', 163), (u'2010', 165), (u'2012', 164)]
 ~~~
 
-##Solution to Challenges
+##Solution
 
 ###Solution to Challenge 1
 
