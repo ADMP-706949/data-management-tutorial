@@ -5,10 +5,12 @@ Let’s start with a map example where the goal is to convert temperature from C
 
 Here it is how it translates in PySpark.
 
+~~~
 temp_c = [10, 3, -5, 25, 1, 9, 29, -10, 5]
 rdd_temp_c = sc.parallelize(temp_c)
 rdd_temp_K = rdd_temp_c.map(lambda x: x + 273.15).collect()
 print(rdd_temp_K)   
+~~~
 
 You recognize the map function (please note it is not the pure python map function but PySpark map function). It acts here as the transformation function while collect is the action. It pulls all elements of the RDD to the driver.
 
