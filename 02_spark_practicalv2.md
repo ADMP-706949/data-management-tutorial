@@ -78,7 +78,13 @@ If you make a mistake during this step or you put the wrong file in the HDFS, yo
 hdfs dfs -rm -r hdfs://sandbox.hortonworks.com/tmp/daily_show_guests.csv
 ~~~
 
-Next, to create the RDD we'll be using the *PySpark* Python interpreter, so we'll need to tell the Zeppelin notebook this by prefixing the command with `%pyspark`:
+SparkContext
+
+SparkContext is the object that manages the connection to the clusters in Spark and coordinates running processes on the clusters themselves. SparkContext connects to cluster managers, which manage the actual executors that run the specific computations. Here’s a diagram from the Spark documentation to better visualize the architecture:
+
+\ ![An empty blank notebook](fig/cluster-overview.png)
+
+The SparkContext object is usually referenced as the variable sc. Next, to create the RDD we'll be using the *PySpark* Python interpreter, so we'll need to tell the Zeppelin notebook this by prefixing the command with `%pyspark`:
 
 ~~~
 %pyspark
@@ -113,7 +119,7 @@ and former presidents are all under "politicians"
 `Raw_Guest_List` | The person or list of people who appeared on the show, according to Wikipedia. 
 The GoogleKnowlege_Occupation only refers to one of them in a given row. 
 
-So take a look at the first 5 rows of the RDD we just created:
+To read a daily_show_guests.csv into an RDD object raw_data. The RDD object raw_data closely resembles a List of String objects, one object for each line in the dataset. We then use the take() method to print the first 5 elements of the RDD, so take a look at the first 5 rows of the RDD we just created:
 
 ~~~
 %pyspark
