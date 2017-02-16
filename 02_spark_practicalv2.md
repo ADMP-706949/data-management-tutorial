@@ -1,6 +1,37 @@
 #Practical 2: Using Pyspark to analyse data using Apache Spark
 
-##Map/Reduce
+##Spark Initialization: Spark Context
+
+SparkContext is the object that manages the connection to the clusters in Spark and coordinates running processes on the clusters themselves. SparkContext connects to cluster managers, which manage the actual executors that run the specific computations. Here’s a diagram from the Spark documentation to better visualize the architecture:
+
+\ ![An empty blank notebook](fig/cluster-overview.png)
+
+It may be automatically created (for instance if you call pyspark from the shells (the Spark context is then called sc).
+
+But we haven’t set it up automatically in the Galaxy eduPortal, so you need to define it:
+
+from pyspark import SparkContext
+sc = SparkContext('local', 'pyspark tutorial') 
+ 
+
+the driver (first argument) can be local[*], spark://”, **yarn, etc. What is available for you depends on how Spark has been deployed on the machine you use.
+the second argument is the application name and is a human readable string you choose.
+ 
+
+Because we do not specify any number of tasks for local, it means we will be using one only. To use a maximum of 2 tasks in parallel:
+
+from pyspark import SparkContext
+sc = SparkContext('local[2]', 'pyspark tutorial') 
+If you wish to use all the available resource, you can simply use ‘*’ i.e.
+
+from pyspark import SparkContext
+sc = SparkContext('local[*]', 'pyspark tutorial') 
+Please note that within one session, you cannot define several Spark context! So if you have tried the 3 previous SparkContext examples, don’t be surprised to get an error!
+
+ 
+
+##Exercise 1: Map/Reduce
+
 Let’s start with a map example where the goal is to convert temperature from Celcius to Kelvin.
 
 Here it is how it translates in PySpark.
@@ -27,7 +58,7 @@ rdd_temp_K = rdd_temp_c.map(lambda x: x + 273.15).take(3)
 print(rdd_temp_K)   
 ~~~
 
-####Challenge
+####Challenge:
 
 ~~~
 def mod(x):
@@ -136,13 +167,7 @@ If you make a mistake during this step or you put the wrong file in the HDFS, yo
 hdfs dfs -rm -r hdfs://sandbox.hortonworks.com/tmp/daily_show_guests.csv
 ~~~
 
-SparkContext
-
-SparkContext is the object that manages the connection to the clusters in Spark and coordinates running processes on the clusters themselves. SparkContext connects to cluster managers, which manage the actual executors that run the specific computations. Here’s a diagram from the Spark documentation to better visualize the architecture:
-
-\ ![An empty blank notebook](fig/cluster-overview.png)
-
-The SparkContext object is usually referenced as the variable sc. Next, to read a CSV file called "daily_show_guests.csv" into an RDD object called "my_rdd", we'll be using the *PySpark* Python interpreter, so we'll need to tell the Zeppelin notebook this by prefixing the command with `%pyspark`:
+ #####Next, to read a CSV file called "daily_show_guests.csv" into an RDD object called "my_rdd", we'll be using the *PySpark* Python interpreter, so we'll need to tell the Zeppelin notebook this by prefixing the command with `%pyspark`:
 
 ~~~
 %pyspark
