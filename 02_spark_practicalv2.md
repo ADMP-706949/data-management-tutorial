@@ -77,7 +77,7 @@ Why?
 If you get the answer without looking for help, award yourself a pat on the back! If you need a pointer or two, have a look at the solution's section at the end of this document.
 
 Now let’s take another example where we use map as the transformation and reduce for the action.
-
+~~~
 # we define a list of integers
 numbers = [1, 4, 6, 2, 9, 10]
 
@@ -86,6 +86,7 @@ rdd_numbers=sc.parallelize(numbers)
 # Use reduce to combine numbers
 rdd_reduce = rdd_numbers.reduce(lambda x,y: "(" + str(x) + ", " + str(y) + ")")
 print(rdd_reduce)
+~~~
 
 # Next exercise 
 
