@@ -1,6 +1,9 @@
 #Practical 2: Using Pyspark to analyse data using Apache Spark
-http://ufal.mff.cuni.cz/~straka/courses/npfl102/pyspark-1.6.1.pdf
+
 Spark is an increasingly popular cluster computing system based on Apache Hadoop that offers great potential value because of its speed and ease of use. We are going to have a look at it here, with special focus on the Python interface to Spark: PySpark.
+
+Other useful information that is helpful as a resource that can be used throughout this tutorial:
+http://spark.apache.org/docs/2.1.0/api/python/pyspark.html 
 
 ##Spark Initialization: Spark Context
 
