@@ -317,7 +317,38 @@ rdd = sc.parallelize(range(Nmax)).map(mod).take(5)
 print(rdd)
 ~~~
 
-##Further reading
+
+##The Spark universe
+
+###Other interesting tools for Spark:
+
+Spark SQL: http://spark.apache.org/docs/latest/sql-programming-guide.html
+MLlib, Spark's machine learning library: http://spark.apache.org/docs/latest/mllib-guide.html
+Spark Streaming, for streaming data applications: http://spark.apache.org/docs/latest/streaming-programming-guide.html
+
+##More information
+
+###Documentation
+
+Spark documentation: https://spark.apache.org/docs/latest/index.html
+Spark programming guide: http://spark.apache.org/docs/latest/programming-guide.html
+PySpark documentation: https://spark.apache.org/docs/latest/api/python/index.html
+
+###Books
+Learning Spark: http://shop.oreilly.com/product/0636920028512.do
+(preview: https://www.safaribooksonline.com/library/view/learning-spark/9781449359034/)
+
+##Talks (recommended to watch them in this order)
+
+Parallel programming with Spark: https://www.youtube.com/watch?v=7k4yDKBYOcw
+
+Advanced Spark features: https://www.youtube.com/watch?v=w0Tisli7zn4
+
+PySpark: Python API for Spark: https://www.youtube.com/watch?v=xc7Lc8RA8wE
+
+Understanding Spark performance: https://www.youtube.com/watch?v=NXp3oJHNM7E
+
+A deeper understanding of Spark's internals: https://www.youtube.com/watch?v=dmL0N3qfSc8
 
 
 
