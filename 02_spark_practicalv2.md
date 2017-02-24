@@ -1,4 +1,6 @@
 #Practical 2: Using Pyspark to analyse data using Apache Spark
+http://ufal.mff.cuni.cz/~straka/courses/npfl102/pyspark-1.6.1.pdf
+Spark is an increasingly popular cluster computing system based on Apache Hadoop that offers great potential value because of its speed and ease of use. We are going to have a look at it here, with special focus on the Python interface to Spark: PySpark.
 
 ##Spark Initialization: Spark Context
 
@@ -28,9 +30,12 @@ from pyspark import SparkContext
 sc = SparkContext('local[*]', 'pyspark tutorial') 
 Please note that within one session, you cannot define several Spark context! So if you have tried the 3 previous SparkContext examples, don’t be surprised to get an error!
 
- 
-
 ##Exercise 1: Map/Reduce
+
+The map() transformation takes in a function and applies it to each element in the RDD with the result of the function being the new value of each element in the resulting RDD. We can use map() to do any number of things, from fetching the website associated
+with each URL in our collection to just squaring the numbers. It is useful to note that map()’s return type does not have to be the same as its input type, so if we had an RDD String and our map() function were to parse the strings and return a Double, our input RDD type would be RDD[String] and the resulting RDD type would be RDD[Double].
+
+By using the map transformation in Spark, we can apply a function to every element in our RDD. Python's lambdas are specially expressive for this particular.
 
 Let’s start with a map example where the goal is to convert temperature from Celcius to Kelvin.
 
@@ -43,11 +48,11 @@ rdd_temp_K = rdd_temp_c.map(lambda x: x + 273.15).collect()
 print(rdd_temp_K)   
 ~~~
 
-You recognize the map function (please note it is not the pure python map function but PySpark map function). It acts here as the transformation function while collect is the action. It pulls all elements of the RDD to the driver.
+You recognize the map function (please note it is not the pure python map function but PySpark map function). It acts here as the transformation function while collect is the action. It pulls all elements of the RDD to the driver. This can be useful if your program filters RDDs down to a very small size and you’d like to deal with it locally. 
 
 ####Remark:
 
-It is often a very bad idea to pull all the elements of the RDD to the driver because we potentially handle very large amount of data. So instead we prefer to use take as you can specify how many elements you wish to pull from the RDD.
+Keep in mind that your entire dataset must fit in memory on a single machine to use collect() on it, so collect() shouldn’t be used on large datasets. It is often a very bad idea to pull all the elements of the RDD to the driver because we potentially handle very large amount of data. So instead we prefer to use take as you can specify how many elements you wish to pull from the RDD.
 
 For instance to pull the first 3 elements only:
 
@@ -87,6 +92,8 @@ rdd_numbers=sc.parallelize(numbers)
 rdd_reduce = rdd_numbers.reduce(lambda x,y: "(" + str(x) + ", " + str(y) + ")")
 print(rdd_reduce)
 ~~~
+
+reduce() require that the return type of our result be the same type as that of the elements in the RDD we are operating over.
 
 ##Exercise 2: Create RDD from a file & explore the data 
 
@@ -177,7 +184,7 @@ my_rdd = sc.textFile('hdfs://sandbox.hortonworks.com/tmp/daily_show_guests.csv')
 
 We refer to the HDFS within this Sandbox as `hdfs://sandbox.hortonworks.com`. It's not a web address.
 
-Let's make sure the data has been loaded into the `RDD` we called `my_rdd` by counting how many lines there are:
+This 'filter' transformation applied (below) to RDDs in order to keep just elements that satisfy a certain condition. More concretely, a function is evaluated on every element in the original RDD. The new resulting RDD will contain just those elements that make the function return True. Let's make sure the data has been loaded into the `RDD` we called `my_rdd` by counting how many lines there are:
 
 ~~~
 %pyspark
