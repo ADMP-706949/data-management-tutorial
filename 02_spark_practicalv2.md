@@ -312,7 +312,7 @@ To flex Spark’s muscles, we’ll demonstrate how to chain together a series of
 
 Thanks to Spark’s aggressive usage of memory (and only disk as a backup and for specific tasks) and well architected core, Spark is able to improve significantly on Hadoop’s turnaround time. In the following code block, we’ll filter out actors with no profession listed, lowercase each profession, generate a histogram of professions, and output the first 5 tuples in the histogram.
 ~~~
-filtered_daily_show.filter(lambda line: line[1] != '') \
+cleaned_daily_show.filter(lambda line: line[1] != '') \
                    .map(lambda line: (line[1].lower(), 1)) \
                    .reduceByKey(lambda x,y: x+y) \
                    .take(5)
