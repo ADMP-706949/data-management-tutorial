@@ -9,7 +9,7 @@ http://spark.apache.org/docs/2.1.0/api/python/pyspark.html
 
 A Spark cluster consists of two processes, a driver program and multiple workers nodes each running an executor process. The driver program runs on the driver machine, the worker program runs on cluster nodes or on local threads. The first thing a program does is to create a Spark context object, this tell Spark HOW and WHERE to access a cluster. SparkContext is the object that manages the connection to the clusters in Spark and coordinates running processes on the clusters themselves. A Spark context connects to the Cluster Manager. The Cluster Manager allocates resources across applications. Once connected Spark acquires executors and the worker nodes. An Executor is a process that runs computations and stores data for your application. JAR or Python files pass to the Spark Context and then sent to the Executors. Spark context will send the tasks for the Executor to run. The worker nodes can access data storage sources to ingest and output data as needed. Here’s a diagram from the Spark documentation to better visualize the architecture:
 
-\ ![An empty blank notebook](fig/cluster-overview.png)
+![An empty blank notebook](fig/cluster-overview.png)
 
 It may be automatically created (for instance if you call pyspark from the shells (the Spark context is then called sc).
 
