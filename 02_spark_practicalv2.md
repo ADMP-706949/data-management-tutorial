@@ -11,7 +11,19 @@ A Spark cluster consists of two processes, a driver program and multiple workers
 
 ![An empty blank notebook](fig/cluster-overview.png)
 
-It may be automatically created (for instance if you call pyspark from the shells (the Spark context is then called sc).
+The SparkContext object is usually referenced as the variable sc. We then run:
+
+#### Example (do not run it)
+~~~
+raw_data = sc.textFile("daily_show.tsv")
+~~~
+to read the TSV dataset into an RDD object raw_data. The RDD object raw_data closely resembles a List of String objects, one object for each line in the dataset. We then use the take() method to print the first 5 elements of the RDD:
+
+#### Example (do not run it)
+~~~
+raw_data.take(5)
+~~~
+To explore the other methods an RDD object has access to, check out the PySpark documentation. take(n) will return the first n elements of the RDD.
 
 ##Exercise 1: Map/Reduce
 
