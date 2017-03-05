@@ -7,31 +7,11 @@ http://spark.apache.org/docs/2.1.0/api/python/pyspark.html
 
 ##Spark Initialization: Spark Context
 
-SparkContext is the object that manages the connection to the clusters in Spark and coordinates running processes on the clusters themselves. SparkContext connects to cluster managers, which manage the actual executors that run the specific computations. Here’s a diagram from the Spark documentation to better visualize the architecture:
+A Spark cluster consists of two processes, a driver program and multiple workers nodes each running an executor process. The driver program runs on the driver machine, the worker program runs on cluster nodes or on local threads. The first thing a program does is to create a Spark context object, this tell Spark HOW and WHERE to access a cluster. SparkContext is the object that manages the connection to the clusters in Spark and coordinates running processes on the clusters themselves. A Spark context connects to the Cluster Manager. The Cluster Manager allocates resources across applications. Once connected Spark acquires executors and the worker nodes. An Executor is a process that runs computations and stores data for your application. JAR or Python files pass to the Spark Context and then sent to the Executors. Spark context will send the tasks for the Executor to run. The worker nodes can access data storage sources to ingest and output data as needed. Here’s a diagram from the Spark documentation to better visualize the architecture:
 
 \ ![An empty blank notebook](fig/cluster-overview.png)
 
 It may be automatically created (for instance if you call pyspark from the shells (the Spark context is then called sc).
-
-But we haven’t set it up automatically in the Galaxy eduPortal, so you need to define it:
-
-from pyspark import SparkContext
-sc = SparkContext('local', 'pyspark tutorial') 
- 
-
-the driver (first argument) can be local[*], spark://”, **yarn, etc. What is available for you depends on how Spark has been deployed on the machine you use.
-the second argument is the application name and is a human readable string you choose.
- 
-
-Because we do not specify any number of tasks for local, it means we will be using one only. To use a maximum of 2 tasks in parallel:
-
-from pyspark import SparkContext
-sc = SparkContext('local[2]', 'pyspark tutorial') 
-If you wish to use all the available resource, you can simply use ‘*’ i.e.
-
-from pyspark import SparkContext
-sc = SparkContext('local[*]', 'pyspark tutorial') 
-Please note that within one session, you cannot define several Spark context! So if you have tried the 3 previous SparkContext examples, don’t be surprised to get an error!
 
 ##Exercise 1: Map/Reduce
 
