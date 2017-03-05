@@ -306,7 +306,25 @@ Will now result in the complete tally of years and numbers of guests per year:
 ~~~
 [(u'1999', 166), (u'2002', 159), (u'2000', 169), (u'2006', 161), (u'2004', 164), (u'2015', 100), (u'2008', 164), (u'2011', 163), (u'2013', 166), (u'2005', 162), (u'2003', 166), (u'2001', 157), (u'2007', 141), (u'2014', 163), (u'2009', 163), (u'2010', 165), (u'2012', 164)]
 ~~~
+## Chaining
 
+To flex Spark’s muscles, we’ll demonstrate how to chain together a series of data transformations into a pipeline and observe Spark managing everything in the background. Spark was written with this functionality in mind and is highly optimized for running tasks in succession. Previously, running lots of tasks in succession in Hadoop was incredibly time consuming since intermediate results needed to be written to disk and Hadoop wasn’t aware of the full pipeline.
+
+Thanks to Spark’s aggressive usage of memory (and only disk as a backup and for specific tasks) and well architected core, Spark is able to improve significantly on Hadoop’s turnaround time. In the following code block, we’ll filter out actors with no profession listed, lowercase each profession, generate a histogram of professions, and output the first 5 tuples in the histogram.
+~~~
+filtered_daily_show.filter(lambda line: line[1] != '') \
+                   .map(lambda line: (line[1].lower(), 1)) \
+                   .reduceByKey(lambda x,y: x+y) \
+                   .take(5)
+~~~
+
+~~~
+[('radio personality', 3),
+ ('television writer', 1),
+ ('american political figure', 2),
+ ('former united states secretary of state', 6),
+ ('mathematician', 1)]
+~~~
 ##Solution
 
 ###Solution to Challenge 1
