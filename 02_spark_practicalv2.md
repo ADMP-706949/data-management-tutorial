@@ -348,7 +348,8 @@ print(rdd)
 
 Spark SQL: http://spark.apache.org/docs/latest/sql-programming-guide.html
 MLlib, Spark's machine learning library: http://spark.apache.org/docs/latest/mllib-guide.html
-Spark Streaming, for streaming data applications: http://spark.apache.org/docs/latest/streaming-programming-guide.html
+Spark Streaming, for streaming data applications: http://spark.apache.org/docs/latest/streaming-programming-guide.html  
+Also, check out Spark streaming with Twitter data: https://www.zeppelinhub.com/viewer/notebooks/aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2hvcnRvbndvcmtzLWdhbGxlcnkvemVwcGVsaW4tbm90ZWJvb2tzL21hc3Rlci8yQjUyMlYzWDgvbm90ZS5qc29u 
 
 ##More information
 
