@@ -1,4 +1,4 @@
-#Practical 2: Using Pyspark to analyse data using Apache Spark
+# Practical 2: Using Pyspark to analyse data using Apache Spark
 
 Spark is an increasingly popular cluster computing system based on Apache Hadoop that offers great potential value because of its speed and ease of use. We are going to have a look at it here, with special focus on the Python interface to Spark: PySpark.
 
