@@ -45,11 +45,11 @@ print(rdd_temp_K)
 
 You recognize the map function (please note it is not the pure python map function but PySpark map function). It acts here as the transformation function while collect is the action. It pulls all elements of the RDD to the driver. This can be useful if your program filters RDDs down to a very small size and you’d like to deal with it locally. 
 
-####More common transformations and actions supported by Spark with explanation of they mean:
+#### More common transformations and actions supported by Spark with explanation of they mean:
 http://spark.apache.org/docs/latest/programming-guide.html#transformations (List of transformations, such as map())
 http://spark.apache.org/docs/latest/programming-guide.html#actions (List of actions, such as collect())
 
-####Remark:
+#### Remark:
 
 Keep in mind that your entire dataset must fit in memory on a single machine to use collect() on it, so collect() shouldn’t be used on large datasets. It is often a very bad idea to pull all the elements of the RDD to the driver because we potentially handle very large amount of data. So instead we prefer to use take as you can specify how many elements you wish to pull from the RDD.
 
