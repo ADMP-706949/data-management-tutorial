@@ -328,6 +328,9 @@ cleaned_daily_show.filter(lambda line: line[1] != '') \
  ('former united states secretary of state', 6),
  ('mathematician', 1)]
 ~~~
+
+Once you have completed the above tasks refer to the documentation below, and try using other #### TRANSFORMATIONS and #### ACTIONS on the Daily Show Guests data.
+
 ## Solution
 
 ### Solution to Challenge 1
@@ -363,6 +366,7 @@ Other notebook examples: https://github.com/hortonworks-gallery/zeppelin-noteboo
 Spark documentation: https://spark.apache.org/docs/latest/index.html
 Spark programming guide: http://spark.apache.org/docs/latest/programming-guide.html
 PySpark documentation: https://spark.apache.org/docs/latest/api/python/index.html
+Spark examples (Python): http://spark.apache.org/examples.html
 
 ### Books
 Learning Spark: http://shop.oreilly.com/product/0636920028512.do
