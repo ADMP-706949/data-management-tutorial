@@ -300,7 +300,7 @@ def filter_out_year(line):
         
 cleaned_daily_show = daily_show.filter (lambda line: filter_out_year(line))
 
-print (cleaned_daily_show_tally.take(cleaned_daily_show_tally.count()))
+print (cleaned_daily_show.take(guest_tally.count()))
 
 ~~~
 
