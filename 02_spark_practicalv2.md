@@ -329,7 +329,7 @@ cleaned_daily_show.filter(lambda line: line[1] != '') \
  ('mathematician', 1)]
 ~~~
 
-Once you have completed the above tasks refer to the documentation below, and try using other #### TRANSFORMATIONS and #### ACTIONS on the Daily Show Guests data.
+#### Once you have completed the above tasks refer to the documentation below, and try using other TRANSFORMATIONS and ACTIONS on the Daily Show Guests data.
 
 ## Solution
 
