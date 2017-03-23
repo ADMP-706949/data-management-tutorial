@@ -94,7 +94,7 @@ print(rdd_reduce)
 
 reduce() require that the return type of our result be the same type as that of the elements in the RDD we are operating over.
 
-##Exercise 2: Create RDD from a file & explore the data 
+## Exercise 2: Create RDD from a file & explore the data 
 
 In these exercises, we'll be using some example data from the **Five Thirty Eight** project. 538 publish articles based on the analysis of polling and other data and make many of the datasets they use available for further analysis.
 
