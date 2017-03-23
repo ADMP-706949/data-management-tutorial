@@ -5,7 +5,7 @@ Spark is an increasingly popular cluster computing system based on Apache Hadoop
 Other useful information that is helpful as a resource that can be used throughout this tutorial:
 http://spark.apache.org/docs/2.1.0/api/python/pyspark.html 
 
-##Spark Initialization: Spark Context
+## Spark Initialization: Spark Context
 
 A Spark cluster consists of two processes, a driver program and multiple workers nodes each running an executor process. The driver program runs on the driver machine, the worker program runs on cluster nodes or on local threads. The first thing a program does is to create a Spark context object, this tell Spark HOW and WHERE to access a cluster. SparkContext is the object that manages the connection to the clusters in Spark and coordinates running processes on the clusters themselves. A Spark context connects to the Cluster Manager. The Cluster Manager allocates resources across applications. Once connected Spark acquires executors and the worker nodes. An Executor is a process that runs computations and stores data for your application. JAR or Python files pass to the Spark Context and then sent to the Executors. Spark context will send the tasks for the Executor to run. The worker nodes can access data storage sources to ingest and output data as needed. Here’s a diagram from the Spark documentation to better visualize the architecture:
 
@@ -25,7 +25,7 @@ raw_data.take(5)
 ~~~
 To explore the other methods an RDD object has access to, check out the PySpark documentation. take(n) will return the first n elements of the RDD.
 
-##Exercise 1: Map/Reduce
+## Exercise 1: Map/Reduce
 
 The map() transformation takes in a function and applies it to each element in the RDD with the result of the function being the new value of each element in the resulting RDD. We can use map() to do any number of things, from fetching the website associated
 with each URL in our collection to just squaring the numbers. It is useful to note that map()’s return type does not have to be the same as its input type, so if we had an RDD String and our map() function were to parse the strings and return a Double, our input RDD type would be RDD[String] and the resulting RDD type would be RDD[Double].
@@ -62,7 +62,7 @@ rdd_temp_K = rdd_temp_c.map(lambda x: x + 273.15).take(3)
 print(rdd_temp_K)   
 ~~~
 
-####Challenge:
+#### Challenge:
 
 ~~~
 def mod(x):
@@ -127,7 +127,7 @@ You should get a new blank notebook:
 \ ![An empty blank notebook](fig/empty_notebook.png)
 
 
-##First steps with analysis
+## First steps with analysis
 
 We need to get data using the 'Shell' interpreter. This will download the dataset into the Virtual Machine you created earlier:
 
@@ -174,7 +174,7 @@ If you make a mistake during this step or you put the wrong file in the HDFS, yo
 hdfs dfs -rm -r hdfs://sandbox.hortonworks.com/tmp/daily_show_guests.csv
 ~~~
 
- #####Next, to read a CSV file called "daily_show_guests.csv" into an RDD object called "my_rdd", we'll be using the *PySpark* Python interpreter, so we'll need to tell the Zeppelin notebook this by prefixing the command with `%pyspark`:
+ ##### Next, to read a CSV file called "daily_show_guests.csv" into an RDD object called "my_rdd", we'll be using the *PySpark* Python interpreter, so we'll need to tell the Zeppelin notebook this by prefixing the command with `%pyspark`:
 
 ~~~
 %pyspark
@@ -248,7 +248,7 @@ Note the [SQUARE BRACKETS] around each line. This is a list. Each line is now a 
 To recap then, we:
 
 1. Called the RDD function `map()` to specify we want the expression in the brackets to be applied to every line in our dataset 
-2. Wrote a **lambda function**fig to split each line using the comma delimiter "," and assigned the resulting RDD to `daily_show`. In Python, a lambda function is just a small self-contained function or expression.
+2. Wrote a **lambda function** fig to split each line using the comma delimiter "," and assigned the resulting RDD to `daily_show`. In Python, a lambda function is just a small self-contained function or expression.
 3. Called the RDD function `take()` on `daily_show` to display the first 5 rows of the resulting RDD 
 
 Let's try something a bit more relevant. We need a tally (or simple histogram) of the number of guests each year in our dataset.
@@ -325,9 +325,9 @@ cleaned_daily_show.filter(lambda line: line[1] != '') \
  ('former united states secretary of state', 6),
  ('mathematician', 1)]
 ~~~
-##Solution
+## Solution
 
-###Solution to Challenge 1
+### Solution to Challenge 1
 
 Transformations are executed after actions and here we select 5 values only (take(5)) so whatever the number of Nmax, Spark executes exactly the same number of operations.
 
@@ -342,9 +342,9 @@ print(rdd)
 ~~~
 
 
-##The Spark universe
+## The Spark universe
 
-###Other interesting tools for Spark:
+### Other interesting tools for Spark:
 
 Spark SQL: http://spark.apache.org/docs/latest/sql-programming-guide.html
 MLlib, Spark's machine learning library: http://spark.apache.org/docs/latest/mllib-guide.html
@@ -353,19 +353,19 @@ Also, check out Spark streaming with Twitter data: https://www.zeppelinhub.com/v
 
 Other notebook examples: https://github.com/hortonworks-gallery/zeppelin-notebooks
 
-##More information
+## More information
 
-###Documentation
+### Documentation
 
 Spark documentation: https://spark.apache.org/docs/latest/index.html
 Spark programming guide: http://spark.apache.org/docs/latest/programming-guide.html
 PySpark documentation: https://spark.apache.org/docs/latest/api/python/index.html
 
-###Books
+### Books
 Learning Spark: http://shop.oreilly.com/product/0636920028512.do
 (preview: https://www.safaribooksonline.com/library/view/learning-spark/9781449359034/)
 
-##Talks (recommended to watch them in this order)
+## Talks (recommended to watch them in this order)
 
 Parallel programming with Spark: https://www.youtube.com/watch?v=7k4yDKBYOcw
 
