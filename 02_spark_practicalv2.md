@@ -37,6 +37,7 @@ Let’s start with a map example where the goal is to convert temperature from C
 Here it is how it translates in PySpark.
 
 ~~~
+%pyspark
 temp_c = [10, 3, -5, 25, 1, 9, 29, -10, 5]
 rdd_temp_c = sc.parallelize(temp_c)
 rdd_temp_K = rdd_temp_c.map(lambda x: x + 273.15).collect()
@@ -56,6 +57,7 @@ Keep in mind that your entire dataset must fit in memory on a single machine to 
 For instance to pull the first 3 elements only:
 
 ~~~
+%pyspark
 temp_c = [10, 3, -5, 25, 1, 9, 29, -10, 5]
 rdd_temp_c = sc.parallelize(temp_c)
 rdd_temp_K = rdd_temp_c.map(lambda x: x + 273.15).take(3)
@@ -65,6 +67,7 @@ print(rdd_temp_K)
 #### Challenge:
 
 ~~~
+%pyspark
 def mod(x):
     import numpy as np
     return (x, np.mod(x, 2))
