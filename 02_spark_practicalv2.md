@@ -367,6 +367,7 @@ Spark documentation: https://spark.apache.org/docs/latest/index.html
 Spark programming guide: http://spark.apache.org/docs/latest/programming-guide.html
 PySpark documentation: https://spark.apache.org/docs/latest/api/python/index.html
 Spark examples (Python): http://spark.apache.org/examples.html
+Setup Spark - http://mbonaci.github.io/mbo-spark/
 
 ### Books
 Learning Spark: http://shop.oreilly.com/product/0636920028512.do
@@ -383,19 +384,3 @@ PySpark: Python API for Spark: https://www.youtube.com/watch?v=xc7Lc8RA8wE
 Understanding Spark performance: https://www.youtube.com/watch?v=NXp3oJHNM7E
 
 A deeper understanding of Spark's internals: https://www.youtube.com/watch?v=dmL0N3qfSc8
-
-Setup Spark - http://mbonaci.github.io/mbo-spark/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
