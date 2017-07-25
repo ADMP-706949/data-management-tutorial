@@ -384,7 +384,7 @@ Understanding Spark performance: https://www.youtube.com/watch?v=NXp3oJHNM7E
 
 A deeper understanding of Spark's internals: https://www.youtube.com/watch?v=dmL0N3qfSc8
 
-
+Setup Spark - http://mbonaci.github.io/mbo-spark/
 
 
 
