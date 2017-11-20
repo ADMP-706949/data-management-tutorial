@@ -36,7 +36,7 @@ To explore the other methods an RDD object has access to, check out the PySpark 
 ### Other helpful tips:
 
 ##### Display type of SparkContext
-If you would like to display the type of the Spark Context sc, execute the following command below:
+If you would like to display the type of the Spark Context sc, try printing out sc to see its type:
 ~~~
 # Display the type of the Spark Context sc
 type(sc)
@@ -54,13 +54,29 @@ Alternatively, you can use Python's help() function to get an easier to read lis
 ~~~
 # Use help to obtain more detailed information
 help(sc)
-
+~~~
+~~~
 # After reading the help we've decided we want to use sc.version to see what version of Spark we are running
 sc.version
-
+~~~
+~~~
 # Help can be used on any Python object
 help(map)
 ~~~
+#### Example
+# Parallelize data using 8 partitions
+# This operation is a transformation of data into an RDD
+# Spark uses lazy evaluation, so no Spark jobs are run at this point
+xrangeRDD = sc.parallelize(data, 8)
+
+# Let's see what type sc.parallelize() returned
+print 'type of xrangeRDD: {0}'.format(type(xrangeRDD))
+
+# How about if we use a range
+dataRange = range(1, 10001)
+rangeRDD = sc.parallelize(dataRange, 8)
+print 'type of dataRangeRDD: {0}'.format(type(rangeRDD))
+
 ## Exercise 1: Map/Reduce
 
 The map() transformation takes in a function and applies it to each element in the RDD with the result of the function being the new value of each element in the resulting RDD. We can use map() to do any number of things, from fetching the website associated
@@ -86,7 +102,7 @@ rdd_temp_K = rdd_temp_c.map(lambda x: x + 273.15).collect()
 print(rdd_temp_K)   
 ~~~
 
-Write the script below in your note and inspect the result. You will recognize the map function (please note it is not the pure python map function but PySpark map function). It acts here as the transformation function while collect is the action. It pulls all elements of the RDD to the driver. This can be useful if your program filters RDDs down to a very small size and you’d like to deal with it locally. 
+Write the script in your note and inspect the result. You will recognize the map function (please note it is not the pure python map function but PySpark map function). It acts here as the transformation function while collect is the action. It pulls all elements of the RDD to the driver. This can be useful if your program filters RDDs down to a very small size and you’d like to deal with it locally. 
 
 #### More common transformations and actions supported by Spark with explanation of they mean:
 http://spark.apache.org/docs/latest/programming-guide.html#transformations (List of transformations, such as map())
@@ -230,6 +246,11 @@ The RDD object my_rdd closely resembles a List of String objects, one object for
 ~~~
 %pyspark
 print (my_rdd.take(5))
+
+# We can view the lineage (the set of transformations) of the RDD using toDebugString() - does not work with numbers
+#print my_rdd.toDebugString() # to run this remove "#" so its print rather than #print
+# If we would like to, we can see how many partitions the RDD will be split into by using the getNumPartitions()
+#my_rdd.getNumPartitions() # to run this remove "#" so its my_rdd rather than #my_rdd
 ~~~
 
 You'll note that the first row is a header row, but this is a bit of a mixed up format. It will make it much easier for us if we can turn each line into a LIST of other items. This will make it more straightforward to handle in Python.
@@ -322,27 +343,8 @@ Will now result in the complete tally of years and numbers of guests per year:
 ~~~
 [(u'1999', 166), (u'2002', 159), (u'2000', 169), (u'2006', 161), (u'2004', 164), (u'2015', 100), (u'2008', 164), (u'2011', 163), (u'2013', 166), (u'2005', 162), (u'2003', 166), (u'2001', 157), (u'2007', 141), (u'2014', 163), (u'2009', 163), (u'2010', 165), (u'2012', 164)]
 ~~~
-## Chaining
 
-To flex Spark’s muscles, we’ll demonstrate how to chain together a series of data transformations into a pipeline and observe Spark managing everything in the background. Spark was written with this functionality in mind and is highly optimized for running tasks in succession. Previously, running lots of tasks in succession in Hadoop was incredibly time consuming since intermediate results needed to be written to disk and Hadoop wasn’t aware of the full pipeline.
-
-Thanks to Spark’s aggressive usage of memory (and only disk as a backup and for specific tasks) and well architected core, Spark is able to improve significantly on Hadoop’s turnaround time. In the following code block, we’ll filter out actors with no profession listed, lowercase each profession, generate a histogram of professions, and output the first 5 tuples in the histogram.
-~~~
-cleaned_daily_show.filter(lambda line: line[1] != '') \
-                   .map(lambda line: (line[1].lower(), 1)) \
-                   .reduceByKey(lambda x,y: x+y) \
-                   .take(5)
-~~~
-
-~~~
-[('radio personality', 3),
- ('television writer', 1),
- ('american political figure', 2),
- ('former united states secretary of state', 6),
- ('mathematician', 1)]
-~~~
-
-#### Once you have completed the above tasks refer to the documentation below, and try using other TRANSFORMATIONS and ACTIONS on the Daily Show Guests data.
+#### Once you have completed the above tasks, try to use other TRANSFORMATIONS and ACTIONS on the Daily Show Guests data. I suggest you start here first:http://spark.apache.org/docs/1.6.0/api/python/pyspark.html for inspiration. For further information refer to the documentation below: 
 
 ## The Spark universe
 
