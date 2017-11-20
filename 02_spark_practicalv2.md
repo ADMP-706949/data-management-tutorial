@@ -54,28 +54,13 @@ Alternatively, you can use Python's help() function to get an easier to read lis
 ~~~
 # Use help to obtain more detailed information
 help(sc)
-~~~
-~~~
+
 # After reading the help we've decided we want to use sc.version to see what version of Spark we are running
 sc.version
-~~~
-~~~
+
 # Help can be used on any Python object
 help(map)
 ~~~
-#### Example
-# Parallelize data using 8 partitions
-# This operation is a transformation of data into an RDD
-# Spark uses lazy evaluation, so no Spark jobs are run at this point
-xrangeRDD = sc.parallelize(data, 8)
-
-# Let's see what type sc.parallelize() returned
-print 'type of xrangeRDD: {0}'.format(type(xrangeRDD))
-
-# How about if we use a range
-dataRange = range(1, 10001)
-rangeRDD = sc.parallelize(dataRange, 8)
-print 'type of dataRangeRDD: {0}'.format(type(rangeRDD))
 
 ## Exercise 1: Map/Reduce
 
