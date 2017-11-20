@@ -38,9 +38,15 @@ with each URL in our collection to just squaring the numbers. It is useful to no
 
 By using the map transformation in Spark, we can apply a function to every element in our RDD. Python's lambdas are specially expressive for this particular.
 
-Let’s start with a map example where the goal is to convert temperature from Celcius to Kelvin.
+Let’s start with a map example, but first we must launch **Apache Zeppelin**. This provides an online interactive Data Science notebook which uses the Python programming language in the background. If the IP address of your instance is (for example: `192.168.214.131`, you'll find your notebook at web address: `http://192.168.214.131:9995`
 
-Here it is how it translates in PySpark.
+You should see something like this:
+
+\ ![Zeppelin Notebook Splash Screen](fig/notebook_splash_screen.png)
+
+Once you have launched Apache Zeppelin, you are required to create a "Notebook". From the Notebook drop-down select *Create new note+* and give the new notebook a suitable name and then select "Create Note".  
+
+Now we can focus back on the task at hand. The goal of the map example below is to convert temperature from Celcius to Kelvin. Here below shows how it translates in PySpark. 
 
 ~~~
 %pyspark
@@ -50,7 +56,7 @@ rdd_temp_K = rdd_temp_c.map(lambda x: x + 273.15).collect()
 print(rdd_temp_K)   
 ~~~
 
-You recognize the map function (please note it is not the pure python map function but PySpark map function). It acts here as the transformation function while collect is the action. It pulls all elements of the RDD to the driver. This can be useful if your program filters RDDs down to a very small size and you’d like to deal with it locally. 
+Write the script below in your note and inspect the result. You will recognize the map function (please note it is not the pure python map function but PySpark map function). It acts here as the transformation function while collect is the action. It pulls all elements of the RDD to the driver. This can be useful if your program filters RDDs down to a very small size and you’d like to deal with it locally. 
 
 #### More common transformations and actions supported by Spark with explanation of they mean:
 http://spark.apache.org/docs/latest/programming-guide.html#transformations (List of transformations, such as map())
@@ -98,17 +104,7 @@ First, download the `daily_show_guests.csv` file to your PC. Take a look at at a
 
 This should open up in your Spreadsheet application as it's a `csv` comma-separated variable file. This isn't a particularly large dataset, but it's large enough to demonstrate some important principles.
 
-In your HortonWorks VM, launch **Apache Zeppelin**. This provides an online interactive Data Science notebook which uses the Python programming language in the background.
-
-If the IP address of your instance is (for example: `10.123.231.19`, you'll find your notebook at web address:
-
-`http://10.123.231.19:9995`
-
-You should see something like this:
-
-\ ![Zeppelin Notebook Splash Screen](fig/notebook_splash_screen.png)
-
-From the Notebook drop-down select *Create new note+* and give the new notebook a suitable name:
+In your HortonWorks VM, create a new note within **Apache Zeppelin**. From the Notebook drop-down select *Create new note+* and give the new notebook a suitable name:
 
 ![Naming the new notebook](fig/notebook_name.png)
 
@@ -317,23 +313,6 @@ cleaned_daily_show.filter(lambda line: line[1] != '') \
 ~~~
 
 #### Once you have completed the above tasks refer to the documentation below, and try using other TRANSFORMATIONS and ACTIONS on the Daily Show Guests data.
-
-## Solution
-
-### Solution to Challenge 1
-
-Transformations are executed after actions and here we select 5 values only (take(5)) so whatever the number of Nmax, Spark executes exactly the same number of operations.
-
-~~~
-def mod(x):
-  import numpy as np
-  return (x, np.mod(x, 2))
-
-Nmax= 10000000000
-rdd = sc.parallelize(range(Nmax)).map(mod).take(5)
-print(rdd)
-~~~
-
 
 ## The Spark universe
 
