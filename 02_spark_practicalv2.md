@@ -331,19 +331,12 @@ Will now result in the complete tally of years and numbers of guests per year:
 
 ## Spark Chaining
 
-To flex Spark's muscles, we'll demonstrate how to chain together a series of data transformations into a pipeline and observe Spark managing everything in the background. Spark was written with this functionality in mind and is highly optimized for running tasks in succession. Previously, running lots of tasks in succession in Hadoop was incredibly time consuming since intermediate results needed to be written to disk and Hadoop wasn't aware of the full pipeline (optional reading if you're curious: http://qr.ae/RHWrT2). 
+To flex Spark's muscles, we will demonstrate how to chain together a series of data transformations into a pipeline and observe Spark managing everything in the background. Spark was written with this functionality in mind and is highly optimised for running tasks in succession. Previously, running lots of tasks in succession in Hadoop was incredibly time consuming since intermediate results needed to be written to disk and Hadoop was not aware of the full pipeline.
 
-Thanks to Spark's aggressive usage of memory (and only disk as a backup and for specific tasks) and well architected core, Spark is able to improve significantly on Hadoop's turnaround time. In the following code block, we will filter out 'YEAR' first as we did before in the first script (1A) and then we'll look to filter out actors with no profession listed, lowercase each profession, generate a histogram of professions, and output the first 5 tuples in the histogram. 
+Thanks to Spark's aggressive usage of memory (and only disk as a backup and for specific tasks) and well architected core, Spark is able to improve significantly on Hadoop's turnaround time. In the following code block, we'll filter out actors with no profession listed, lowercase each profession, generate a histogram of professions, and output the first 5 tuples in the histogram. 
 
-#### 1st script: PART 1A
 ~~~
-#In this first script we are filtering out year with the daily_show
-filtered_daily_show = daily_show.filter(lambda line: filter_out_year(line))
-~~~
-#### 2nd script: PART 1B
-~~~
-#Second script outlined in the above 
-filtered_daily_show.filter(lambda line: line[1] != '') \
+daily_show.filter(lambda line: line[1] != '') \
                    .map(lambda line: (line[1].lower(), 1))\
                    .reduceByKey(lambda x,y: x+y) \
                    .take(5)
