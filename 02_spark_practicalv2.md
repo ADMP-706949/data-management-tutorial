@@ -44,7 +44,7 @@ You should see something like this:
 
 \ ![Zeppelin Notebook Splash Screen](fig/notebook_splash_screen.png)
 
-Once you have launched Apache Zeppelin, you are required to create a "Notebook". From the Notebook drop-down select *Create new note+* and give the new notebook a suitable name and then select "Create Note".  
+Once you have launched Apache Zeppelin, you are required to create a "Notebook". From the Notebook drop-down select *Create new note+* and give the new notebook a suitable name and then select "Create Note". For the next couple of examples after this one you will use the same note you created here.
 
 Now we can focus back on the task at hand. The goal of the map example below is to convert temperature from Celcius to Kelvin. Here below shows how it translates in PySpark. 
 
