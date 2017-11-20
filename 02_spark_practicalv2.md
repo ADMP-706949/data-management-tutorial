@@ -70,26 +70,7 @@ rdd_temp_K = rdd_temp_c.map(lambda x: x + 273.15).take(3)
 print(rdd_temp_K)   
 ~~~
 
-#### Challenge:
-
-~~~
-%pyspark
-def mod(x):
-    import numpy as np
-    return (x, np.mod(x, 2))
-
-Nmax=1000
-rdd = sc.parallelize(range(Nmax)).map(mod).take(5)
-print(rdd)
-~~~
-
-Try the example above with different values for Nmax. Does it change the execution time if you take very large value for Nmax?
-
-Why?
-
-If you get the answer without looking for help, award yourself a pat on the back! If you need a pointer or two, have a look at the solution's section at the end of this document.
-
-Now let’s take another example where we use map as the transformation and reduce for the action.
+#### Now let’s take another example where we use map as the transformation and reduce for the action.
 ~~~
 # we define a list of integers
 numbers = [1, 4, 6, 2, 9, 10]
