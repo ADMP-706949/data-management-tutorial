@@ -329,6 +329,33 @@ Will now result in the complete tally of years and numbers of guests per year:
 [(u'1999', 166), (u'2002', 159), (u'2000', 169), (u'2006', 161), (u'2004', 164), (u'2015', 100), (u'2008', 164), (u'2011', 163), (u'2013', 166), (u'2005', 162), (u'2003', 166), (u'2001', 157), (u'2007', 141), (u'2014', 163), (u'2009', 163), (u'2010', 165), (u'2012', 164)]
 ~~~
 
+## Spark Chaining
+
+To flex Spark's muscles, we'll demonstrate how to chain together a series of data transformations into a pipeline and observe Spark managing everything in the background. Spark was written with this functionality in mind and is highly optimized for running tasks in succession. Previously, running lots of tasks in succession in Hadoop was incredibly time consuming since intermediate results needed to be written to disk and Hadoop wasn't aware of the full pipeline (optional reading if you're curious: http://qr.ae/RHWrT2). 
+
+Thanks to Spark's aggressive usage of memory (and only disk as a backup and for specific tasks) and well architected core, Spark is able to improve significantly on Hadoop's turnaround time. In the following code block, we will filter out 'YEAR' first as we did before in the first script (1A) and then we'll look to filter out actors with no profession listed, lowercase each profession, generate a histogram of professions, and output the first 5 tuples in the histogram. 
+
+#### 1st script: PART 1A
+~~~
+#In this first script we are filtering out year with the daily_show
+filtered_daily_show = daily_show.filter(lambda line: filter_out_year(line))
+~~~
+#### 2nd script: PART 1B
+~~~
+#Second script outlined in the above 
+filtered_daily_show.filter(lambda line: line[1] != '') \
+                   .map(lambda line: (line[1].lower(), 1))\
+                   .reduceByKey(lambda x,y: x+y) \
+                   .take(5)
+[(u'secretary of state', 1), 
+ (u'former president of the maldives', 1), 
+ (u'professional road racing cyclist', 2), 
+ (u'actress', 271), 
+ (u'television series creator', 3)]
+
+#print the output from the chaining above and then inspect the result
+~~~
+
 #### Once you have completed the above tasks, try to use other TRANSFORMATIONS and ACTIONS on the Daily Show Guests data. I suggest you start here first:http://spark.apache.org/docs/1.6.0/api/python/pyspark.html for inspiration. For further information refer to the documentation below: 
 
 ## The Spark universe
