@@ -5,6 +5,12 @@ Spark is an increasingly popular cluster computing system based on Apache Hadoop
 Other useful information that is helpful as a resource that can be used throughout this tutorial:
 http://spark.apache.org/docs/2.1.0/api/python/pyspark.html 
 
+## Instructions to start Spark's service within Ambari as admin
+
+We must first, setup your admin access to Ambari. We must go to port 8888, there we will have a view of the Hortonworks get started page. On this page select "View Advanced Options" (orange box on the right hand side of the webpage). Below there is a set of instructions to setup the Ambari admin password. Login as root using Putty and follow those set of instructions. Once you have changed the password, Ambari will be restarted. Even though Ambari says it started successfully, it can take a little bit longer to start up fully. Once Ambari has started go to port 8080 and enter your admin as your username and type in the password you chose, then select "Sign in".
+
+Now we have done the above, we can now start Spark's service, which will be demonstrated by your tutor.
+
 ## Spark Initialization: Spark Context
 
 A Spark cluster consists of two processes, a driver program and multiple workers nodes each running an executor process. The driver program runs on the driver machine, the worker program runs on cluster nodes or on local threads. The first thing a program does is to create a Spark context object, this tell Spark HOW and WHERE to access a cluster. SparkContext is the object that manages the connection to the clusters in Spark and coordinates running processes on the clusters themselves. A Spark context connects to the Cluster Manager. The Cluster Manager allocates resources across applications. Once connected Spark acquires executors and the worker nodes. An Executor is a process that runs computations and stores data for your application. JAR or Python files pass to the Spark Context and then sent to the Executors. Spark context will send the tasks for the Executor to run. The worker nodes can access data storage sources to ingest and output data as needed. Here’s a diagram from the Spark documentation to better visualize the architecture:
