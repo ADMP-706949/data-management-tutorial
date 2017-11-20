@@ -17,7 +17,9 @@ A Spark cluster consists of two processes, a driver program and multiple workers
 
 ![An empty blank notebook](fig/cluster-overview.png)
 
-The SparkContext object is usually referenced as the variable sc. We then run:
+You can view the details of your Spark application in the Spark History Server UI. The Spark web UI is accessible by going to find it at this address "http://192.168.214.131:18080/" (replace the sandbox address with your one), port 18080 is Spark's History Server, where you can see a list of jobs that have been scheduled or run. It's likely there isn't any thing interesting here yet because we haven't run any jobs, but you can return to this page later once you have run a script.
+
+A Spark context object (sc) is the main entry point for Spark functionality. A Spark context can be used to create Resilient Distributed Datasets (RDDs) on a cluster. The SparkContext object is usually referenced as the variable sc. We then run:
 
 #### Example (do not run it)
 ~~~
@@ -31,12 +33,40 @@ raw_data.take(5)
 ~~~
 To explore the other methods an RDD object has access to, check out the PySpark documentation. take(n) will return the first n elements of the RDD.
 
+### Other helpful tips:
+
+##### Display type of SparkContext
+If you would like to display the type of the Spark Context sc, execute the following command below:
+~~~
+# Display the type of the Spark Context sc
+type(sc)
+~~~
+##### SparkContext attributes
+You can use Python's dir() function to get a list of all the attributes (including methods) accessible through the sc object.
+~~~
+# List sc's attributes
+dir(sc)
+~~~
+
+#### Getting help
+Alternatively, you can use Python's help() function to get an easier to read list of all the attributes, including examples, that the sc object has.
+
+~~~
+# Use help to obtain more detailed information
+help(sc)
+
+# After reading the help we've decided we want to use sc.version to see what version of Spark we are running
+sc.version
+
+# Help can be used on any Python object
+help(map)
+~~~
 ## Exercise 1: Map/Reduce
 
 The map() transformation takes in a function and applies it to each element in the RDD with the result of the function being the new value of each element in the resulting RDD. We can use map() to do any number of things, from fetching the website associated
 with each URL in our collection to just squaring the numbers. It is useful to note that map()’s return type does not have to be the same as its input type, so if we had an RDD String and our map() function were to parse the strings and return a Double, our input RDD type would be RDD[String] and the resulting RDD type would be RDD[Double].
 
-By using the map transformation in Spark, we can apply a function to every element in our RDD. Python's lambdas are specially expressive for this particular.
+By using the map transformation in Spark, we can apply a function to every element in our RDD. Python's lambdas are specially expressive for this particular. Python supports the use of small one-line anonymous functions that are not bound to a name at runtime. These lambda functions can be used wherever function objects are required. They are syntactically restricted to a single expression. Remember that lambda functions are a matter of style and using them is never required - semantically, they are just syntactic sugar for a normal function definition. You can always define a separate normal function instead, but using a lambda() function is an equivalent and more compact form of coding. Ideally you should consider using lambda functions where you want to encapsulate non-reusable code without littering your code with one-line functions.
 
 Let’s start with a map example, but first we must launch **Apache Zeppelin**. This provides an online interactive Data Science notebook which uses the Python programming language in the background. If the IP address of your instance is (for example: `192.168.214.131`, you'll find your notebook at web address: `http://192.168.214.131:9995`
 
@@ -46,7 +76,7 @@ You should see something like this:
 
 Once you have launched Apache Zeppelin, you are required to create a "Notebook". From the Notebook drop-down select *Create new note+* and give the new notebook a suitable name and then select "Create Note". For the next couple of examples after this one you will use the same note you created here.
 
-Now we can focus back on the task at hand. The goal of the map example below is to convert temperature from Celcius to Kelvin. Here below shows how it translates in PySpark. 
+Now we can focus back on the task at hand. The goal of the map example below is to convert temperature from Celcius to Kelvin. Here below shows how it translates in PySpark. Here, instead of defining a separate function for the map() transformation, we will use an inline lambda() function.
 
 ~~~
 %pyspark
