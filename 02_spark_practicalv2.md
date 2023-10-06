@@ -181,7 +181,7 @@ Spark stores it's data in **Resilient Distributed datasets** (or RDDs for short)
  
 ~~~
 %sh
-hadoop fs -put ~/daily_show_guests.csv /tmp
+hadoop fs -put daily_show_guests.csv /tmp
 ~~~
 
 This will `put` the file we have just downloaded into the directory `tmp` within the HDFS.
@@ -190,14 +190,14 @@ If you make a mistake during this step or you put the wrong file in the HDFS, yo
 
 ~~~
 %sh
-hdfs dfs -rm -r hdfs://sandbox.hortonworks.com/tmp/daily_show_guests.csv
+hdfs dfs -rm -r /tmp/daily_show_guests.csv
 ~~~
 
  ##### Next, to read a CSV file called "daily_show_guests.csv" into an RDD object called "my_rdd", we'll be using the *PySpark* Python interpreter, so we'll need to tell the Zeppelin notebook this by prefixing the command with `%pyspark`:
 
 ~~~
 %pyspark
-my_rdd = sc.textFile('hdfs://sandbox.hortonworks.com/tmp/daily_show_guests.csv')
+my_rdd = spark.sparkContext.textFile('/tmp/daily_show_guests.csv')
 ~~~
 
 We refer to the HDFS within this Sandbox as `hdfs://sandbox.hortonworks.com`. It's not a web address.
@@ -206,7 +206,7 @@ This 'filter' transformation applied (below) to RDDs in order to keep just eleme
 
 ~~~
 %pyspark
-my_rdd = sc.textFile('hdfs://sandbox.hortonworks.com/tmp/daily_show_guests.csv')
+my_rdd = spark.sparkContext.textFile('/tmp/daily_show_guests.csv')
 my_rdd_filtered = my_rdd.filter( lambda x: len(x) > 0 )
 counter = my_rdd_filtered.count()
 print (counter)
