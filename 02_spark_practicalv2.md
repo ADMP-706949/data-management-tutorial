@@ -3,13 +3,11 @@
 Spark is an increasingly popular cluster computing system based on Apache Hadoop that offers great potential value because of its speed and ease of use. We are going to have a look at it here, with special focus on the Python interface to Spark: PySpark.
 
 Other useful information that is helpful as a resource that can be used throughout this tutorial:
-http://spark.apache.org/docs/2.1.0/api/python/pyspark.html 
+https://spark.apache.org/docs/latest/api/python/index.html
 
-## Instructions to start Spark's service within Ambari as admin
+## Instructions to access Spark's service on Azure
 
-We must first, setup your admin access to Ambari. We must go to port 8888, there we will have a view of the Hortonworks get started page. On this page select "View Advanced Options" (orange box on the right hand side of the webpage). Below there is a set of instructions to setup the Ambari admin password. Login as root using Putty and follow those set of instructions. Once you have changed the password, Ambari will be restarted. Even though Ambari says it started successfully, it can take a little bit longer to start up fully. Once Ambari has started go to port 8080 and enter your admin as your username and type in the password you chose, then select "Sign in".
-
-Now we have done the above, we can now start Spark's service, which will be demonstrated by your tutor.
+This will be demonstrated by your tutor.
 
 ## Spark Initialization: Spark Context
 
@@ -75,7 +73,9 @@ You should see something like this:
 
 \ ![Zeppelin Notebook Splash Screen](fig/notebook_splash_screen.png)
 
-Once you have launched Apache Zeppelin, you are required to create a "Notebook". From the Notebook drop-down select *Create new note+* and give the new notebook a suitable name and then select "Create Note". For the next couple of examples after this one you will use the same note you created here.
+Once you have launched Apache Zeppelin in Azure, then you need to select the "anonymous" drop down menu, and select "interpreter". Now select "+ Create", then provide name of sh for "Interpreter Name", then select "sh" for "Intepreter Group". In "Properties" select the box to tick it for both "shell.working.directory.user.home" and zeppelin.shell.interpolation" and leave all other properties as default. Now select "Save" blue button to save the new interpreter called sh. 
+
+you are required to create a "Notebook". From the Notebook drop-down select *Create new note+* and give the new notebook a suitable name and then select "Create Note". For the next couple of examples after this one you will use the same note you created here.
 
 Now we can focus back on the task at hand. The goal of the map example below is to convert temperature from Celcius to Kelvin. Here below shows how it translates in PySpark. Here, instead of defining a separate function for the map() transformation, we will use an inline lambda() function.
 
