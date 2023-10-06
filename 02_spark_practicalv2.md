@@ -135,7 +135,9 @@ First, download the `daily_show_guests.csv` file to your PC. Take a look at at a
 
 This should open up in your Spreadsheet application as it's a `csv` comma-separated variable file. This isn't a particularly large dataset, but it's large enough to demonstrate some important principles.
 
-In your HortonWorks VM, create a new note within **Apache Zeppelin**. From the Notebook drop-down select *Create new note+* and give the new notebook a suitable name:
+In your Zeppelin on Azure, we neeed to select to "anonymous" drop down menu, and then select "Interpreter". Now select "+ Create", then specify an interpreter name of sh, and in interpreter group choose sh. tick the box for "shell.working.directory.user.home" and also the same for "zeppelin.shell.interpolation". All other settings are left as defualt. Now scroll down an select "Save" blue button.
+
+Now navigate back to the Zeppelin homepage on Azure (can select Zeppelin logo to do this), create a new note within **Apache Zeppelin**. From the Notebook drop-down select *Create new note+* and give the new notebook a suitable name:
 
 ![Naming the new notebook](fig/notebook_name.png)
 
